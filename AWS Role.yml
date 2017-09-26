@@ -1,0 +1,13 @@
+---
+- name: Create IAM role with custom trust relationship
+  vars_files:
+  - [var.yml]
+  tasks:
+  iam:
+    aws_access_key: "{{ec2_access_key}}"
+    aws_secret_key: "{{ec2_secret_key}}" 
+    iam_type: role
+    name: vmrole
+    state: present
+    assume_role_policy_document: "{{ lookup('file','trust-policy.json') }}"
+
