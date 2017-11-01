@@ -1,0 +1,16 @@
+---
+ - hosts: localhost
+   connection: local
+   gather_facts: no
+   vars_files:
+   - [var.yml]
+   tasks:
+      - name: 'Install AWS CLI'
+        tags: 'aws-cli'
+        become: 'yes'
+        pip: > 
+          name=awscli
+          state=latest
+
+      - name: version
+        command: aws ec2 import-image --description "windows 2008 ova" --license-type BYOL --disk-containers file:///home/automation/ajishaws/sonal/ansible-aws/containers.json --region eu-west-1 

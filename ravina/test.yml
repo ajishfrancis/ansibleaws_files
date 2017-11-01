@@ -1,0 +1,15 @@
+---
+  - name: Automated option to find a vm is migrated in aws
+    hosts: localhost
+    connection: local
+    vars_files:
+    - [../var.yml]
+    vars:
+      my_varaible: '-'
+      temp: "{{lookup('pipe','date -d \"24 hours ago\" \"+%H\"')}}"
+      test1: "{{lookup('pipe','date \"+%H\"' - temp) }}"
+    tasks:
+    - ec2_instance_facts:
+       filters:
+        vpc-id: vpc-a1920fc6
+        launch-time: '{{ test1 }}'

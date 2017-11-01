@@ -1,0 +1,23 @@
+---
+  - name: Automated option to find a vm is migrated in aws
+    hosts: localhost
+    connection: local
+    vars_files:
+    - [../var.yml]
+    vars:
+     inst_id: "{{ inst.instances | map(attribute='instance_id')| list }}"
+     launch_tm: "{{ inst.instances | map(attribute='launch_time') | list }}"
+     msg: "{{ inst_id }},{{ launch_tm }}"
+    tasks:   
+#    - script: /home/automation/ajishaws/ansibleaws_files/ravina/diff.sh
+    - name: Set 24 Hours ago time
+      set_fact: launch_tm1="{{lookup('pipe','date -d \"'+'{{temp}}'+' hours ago\" \"+%Y-%m-%dT%H\"')}}"
+    - ec2_instance_facts:
+       filters:
+        vpc-id: vpc-a1920fc6
+        launch-time: '{{ launch_tm1 }}*'
+      register: inst
+    - debug: msg="{{ inst_id }},{{ launch_tm }}"
+    - debug: msg="{{ launch_tm1 }}"
+#    - debug: msg="{{ temp }}"
+#    - local_action: copy content={{ msg }} dest=/home/automation/ajishaws/ansibleaws_files/ravina/inst.txt

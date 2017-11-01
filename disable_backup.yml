@@ -1,0 +1,11 @@
+- name: Disable Snapshot
+  hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  tasks:
+  - local_action:
+      module: ec2_snapshot
+      region: eu-west-1
+      snapshot_id: snap-0aa854912d6f3b596 
+      state: absent

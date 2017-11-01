@@ -1,0 +1,14 @@
+---
+- name: gather system configuration
+  hosts: all
+  tasks:
+    - name: setup module is used
+      setup:
+        gather_subset: network
+      register: information
+
+    - name: copy info
+      copy: 
+        content: "{{ information }}"
+        dest: /home/automation/information.txt
+

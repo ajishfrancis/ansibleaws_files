@@ -1,0 +1,11 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: Ansible date fact example
+      debug: dt=ansible_date_time.date
+    - name: Ansible date timestamp example
+      debug: tm=ansible_date_time.epoch
+      debug: 
+        msg:
+         - "Date: {{ dt }}"
+         - "Time: {{ tm }}"

@@ -1,0 +1,14 @@
+[windows]
+#WINR2
+#WIN02
+#WIN04
+#WIN06
+WINAWS1
+#WINAWSDOMAIN
+[windows:vars]
+ansible_ssh_user=Administrator
+ansible_ssh_pass=z)apA&C$KN;
+ansible_ssh_port=5986
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+

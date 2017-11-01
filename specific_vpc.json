@@ -1,0 +1,20 @@
+{
+   "Version": "2012-10-17",
+   "Id": "Policy1415115909153",
+   "Statement": [
+     {
+       "Sid": "Access-to-specific-VPC-only",
+       "Action": "s3:*",
+       "Effect": "Deny",
+       "Resource": ["arn:aws:s3:::ansiblebucket_2017",
+                    "arn:aws:s3:::ansiblebucket_2017/*"],
+       "Condition": {
+         "StringNotEquals": {
+           "aws:sourceVpc": "vpc-a1920fc6" 
+
+         }
+       },
+       "Principal": "*"
+     }
+   ]
+}

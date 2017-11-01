@@ -1,0 +1,16 @@
+---
+- name: upload file to s3 bucket
+  hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  tasks:
+  - name: uploading file
+    aws_s3:
+     bucket: ansiblebucketcoe
+     object: /vmimages/Node2.ova
+     src: /home/automation/ajishaws/ansibleaws_files/Node2.ova
+     mode: put
+     aws_access_key: "{{aws_access_key}}"
+     aws_secret_key: "{{aws_secret_key}}"
+

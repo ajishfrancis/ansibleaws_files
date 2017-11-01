@@ -1,0 +1,21 @@
+---
+ - hosts: localhost
+   name: Configuring Inbound/Outbound Rules in Route table for EC2
+   connection: local
+   vars_files:
+   - [var.yml]
+   tasks:
+   - name: Set up public subnet route table
+     ec2_vpc_route_table:
+        vpc_id: vpc-a1920fc6
+        region: eu-west-1
+        aws_secret_key: "{{aws_secret_key}}"
+        aws_access_key: "{{aws_access_key}}"
+        tags:
+          Name: Public
+        subnets:
+          - subnet-070e9b60
+        routes:
+          - dest: 10.0.0.0/8
+            gateway_id: igw-a2794cc6
+     register: public_route_table

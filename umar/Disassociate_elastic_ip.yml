@@ -1,0 +1,16 @@
+---
+- name: Deallocating elastic IP to instance
+  hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  tasks:
+  - name: started
+    ec2_eip:
+       aws_access_key: "{{aws_access_key}}"
+       aws_secret_key: "{{aws_secret_key}}"
+       device_id: i-0ce2fc1242b26ce20
+       region: eu-west-1
+       ip: 52.211.118.253
+       state: absent
+ 

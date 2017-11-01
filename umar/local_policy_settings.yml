@@ -1,0 +1,9 @@
+---
+- name: local policy setting
+  hosts: all
+  tasks:
+   - name: set the maximum password age
+     win_security_policy:
+       section: System Access
+       key: MaximumPasswordAge
+       value: 15 

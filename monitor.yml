@@ -1,0 +1,26 @@
+---
+ - name: Create alarm
+   hosts: localhost
+   connection: local
+   vars_files:
+   - [var.yml]
+   tasks:
+   - ec2_metric_alarm:
+       state: present
+       aws_access_key: "{{aws_access_key}}"
+       aws_secret_key: "{{aws_secret_key}}"
+       region: eu-west-1
+       name: "cloudwatchforDomainmember"
+       metric: "CPUUtilization"
+      # namespace: "AWS/EC2"
+       statistic: Average
+       comparison: "<="
+       threshold: 3.0
+       period: 300
+       evaluation_periods: 1
+       unit: "Percent"
+       description: "This will alarm when a bamboo slaves's cpu usage average is lower than 3% for 15 minutes "
+       dimensions: {'InstanceId':'i-0ce2fc1242b26ce20'}
+      # alarm_actions: ["domainmemberalarm"]
+
+

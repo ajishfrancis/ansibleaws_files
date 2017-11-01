@@ -1,0 +1,26 @@
+---
+ - hosts: localhost
+   connection: local
+   gather_facts: no
+   vars_files:
+   - [var.yml]
+#   aws_access_key: "{{aws_access_key}}"
+#   aws_secret_key: "{{aws_secret_key}}"
+   tasks:
+   - name: 'Install AWS CLI'
+    # aws_access_key: "{{aws_access_key}}"
+    # aws_secret_key: "{{aws_secret_key}}"
+     tags: 'aws-cli'
+     become: 'yes'
+     pip: > 
+        name=awscli
+        state=latest
+#      - name: cli
+#        command: printf '{{aws_access_key}}\n{{aws_secret_key}}' | aws configure
+#      - debug:
+#         msg: "aws {{aws_access_key}} and secret key {{aws_secret_key}}"
+   - name: version
+     local_action:
+       aws_access_key: "{{aws_access_key}}"
+       aws_secret_key: "{{aws_secret_key}}"
+     command: aws ec2 import-image --description "windows 2008 ova" --license-type BYOL --disk-containers file://containers.json --region eu-west-1 

@@ -1,0 +1,19 @@
+---
+- name: Create s3 bucket using ansible
+  hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  tasks:
+  - name: creation of S3 bucket
+    s3_bucket:
+      name: ansiblebucket2017
+      region: eu-west-1
+      versioning: yes
+      state: absent
+      aws_access_key: "{{aws_access_key}}"
+      aws_secret_key: "{{aws_secret_key}}"
+    register: s3_url
+
+  - name: Display s3 url
+    debug: var=s3_url

@@ -1,0 +1,1 @@
+{"IamInstanceProfileAssociation": {"InstanceId": "i-0ce2fc1242b26ce20", "State": "associating", "AssociationId": "iip-assoc-0862d4326fee6a620", "IamInstanceProfile": {"Id": "AIPAJAE6PDXLFBX2P4HGQ", "Arn": "arn:aws:iam::854007681527:instance-profile/EC2-Systems-Manager-Profile"}}}

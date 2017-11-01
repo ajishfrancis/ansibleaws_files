@@ -1,0 +1,23 @@
+---
+ - hosts: localhost
+   connection: local
+   gather_facts: no
+   sudo: yes
+   vars_files:
+   - [var.yml]
+   tasks:
+      - name: 'Install AWS CLI'
+        tags: 'aws-cli'
+        become: 'yes'
+        pip: > 
+          name=awscli
+          state=latest
+      - name: cli configuration
+        shell: /home/automation/ajishaws/sonal/ansible-aws/a.sh {{aws_access_key}} {{aws_secret_key}}
+      - debug:
+         msg: "aws {{aws_access_key}} and secret key {{aws_secret_key}}"
+      -  name: version
+         command: aws ec2 import-image --description "windows 2008 OVA" --license-type BYOL --disk-containers file://containers.json
+#         command: aws ec2 import-image --description "windows 2008 ova" --license-type BYOL --disk-containers file:///home/automation/ajishaws/sonal/ansible-aws/containers.json
+
+

@@ -1,0 +1,93 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  tasks:
+  - name:               Set VPC ID in variable
+    set_fact:
+       vpc_id:           vpc-a1920fc6
+       
+  - name:               Create Public Subnet
+    ec2_vpc_subnet:
+      state:            "present"
+      vpc_id:           "{{ vpc_id }}"
+      cidr:              192.168.15.111/27
+      az:                eu-west-1a 
+      region:            eu-west-1
+      aws_access_key:   "{{ aws_access_key }}"
+      aws_secret_key:   "{{ aws_secret_key }}"
+      resource_tags:
+        Name:           "Sonam Public Subnet"
+    register: my_public_subnet
+
+  - name:               Set Public Subnet ID in variable
+    set_fact:
+       public_subnet_id: "{{ my_public_subnet.subnet.id }}"
+
+  - name:               Create Private Subnet
+    ec2_vpc_subnet:
+     state:            "present"
+     vpc_id:           "{{ vpc_id }}"
+     cidr:             192.168.15.211/27
+     az:               eu-west-1a
+     region:           eu-west-1
+     aws_access_key:   "{{ aws_access_key }}"
+     aws_secret_key:   "{{ aws_secret_key }}"
+     resource_tags:
+       Name:           "Sonam Private Subnet"
+    register: my_private_subnet
+
+  - name:               Set Private Subnet ID in variable
+    set_fact:
+     private_subnet_id: "{{ my_private_subnet.subnet.id }}"
+
+  - name:               Set Internet Gateway ID in variable
+    set_fact:
+      igw_id:           igw-a2794cc6
+
+  - name: Set up public subnet route table
+    ec2_vpc_route_table:
+      vpc_id: "{{ vpc_id }}"
+      region: eu-west-1
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      tags:
+        Name: "Sonam Public"
+      subnets:
+       - "{{ public_subnet_id }}"
+      routes:
+       - dest: "0.0.0.0/0"
+         gateway_id: "{{ igw_id }}" 
+
+  - name: Set up private subnet route table
+    ec2_vpc_route_table:
+      vpc_id: "{{ vpc_id }}"
+      region: eu-west-1
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      tags:
+        Name: "Sonam Private"
+      subnets:
+        - "{{ private_subnet_id }}"
+      routes:
+        - dest: "0.0.0.0/0"
+         # gateway_id: "{{ nat_gateway_id }}" 
+
+  - name: Set Main SG ID
+    set_fact:
+       main_sg_id: sg-bf251ac7
+
+  - name: Create Private Security Group
+    ec2_group:
+      name: "Private Instances SG"
+      description: "Private Instances SG"
+      vpc_id: "{{ vpc_id }}"
+      region: eu-west-1
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      rules:
+        - proto: "tcp"
+          from_port: "22"
+          to_port: "22"
+          group_id: "{{ main_sg_id }}"

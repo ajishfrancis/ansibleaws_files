@@ -1,0 +1,720 @@
+
+PLAY [Automated option to find a vm is migrated in aws] ************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [ec2_instance_facts] ******************************************************
+ok: [localhost]
+
+TASK [debug] *******************************************************************
+ok: [localhost] => {
+    "instances": {
+        "changed": false, 
+        "failed": false, 
+        "instances": [
+            {
+                "ami_launch_index": 1, 
+                "architecture": "x86_64", 
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1", 
+                        "ebs": {
+                            "attach_time": "2017-09-27T11:13:59+00:00", 
+                            "delete_on_termination": true, 
+                            "status": "attached", 
+                            "volume_id": "vol-0fcb471f119ddc42d"
+                        }
+                    }
+                ], 
+                "client_token": "CQACs1506510837317", 
+                "ebs_optimized": false, 
+                "ena_support": true, 
+                "hypervisor": "xen", 
+                "image_id": "ami-6dd02214", 
+                "instance_id": "i-0ce2fc1242b26ce20", 
+                "instance_type": "t2.micro", 
+                "key_name": "VPNKEY", 
+                "launch_time": "2017-10-11T06:29:22+00:00", 
+                "monitoring": {
+                    "state": "disabled"
+                }, 
+                "network_interfaces": [
+                    {
+                        "association": {
+                            "ip_owner_id": "amazon", 
+                            "public_dns_name": "ec2-34-251-23-184.eu-west-1.compute.amazonaws.com", 
+                            "public_ip": "34.251.23.184"
+                        }, 
+                        "attachment": {
+                            "attach_time": "2017-09-27T11:13:58+00:00", 
+                            "attachment_id": "eni-attach-aa9128c8", 
+                            "delete_on_termination": true, 
+                            "device_index": 0, 
+                            "status": "attached"
+                        }, 
+                        "description": "Primary network interface", 
+                        "groups": [
+                            {
+                                "group_id": "sg-bf251ac7", 
+                                "group_name": "launch-wizard-1"
+                            }
+                        ], 
+                        "ipv6_addresses": [], 
+                        "mac_address": "02:2b:cd:4c:12:ea", 
+                        "network_interface_id": "eni-335db71f", 
+                        "owner_id": "854007681527", 
+                        "private_dns_name": "ip-192-168-15-185.eu-west-1.compute.internal", 
+                        "private_ip_address": "192.168.15.185", 
+                        "private_ip_addresses": [
+                            {
+                                "association": {
+                                    "ip_owner_id": "amazon", 
+                                    "public_dns_name": "ec2-34-251-23-184.eu-west-1.compute.amazonaws.com", 
+                                    "public_ip": "34.251.23.184"
+                                }, 
+                                "primary": true, 
+                                "private_dns_name": "ip-192-168-15-185.eu-west-1.compute.internal", 
+                                "private_ip_address": "192.168.15.185"
+                            }
+                        ], 
+                        "source_dest_check": true, 
+                        "status": "in-use", 
+                        "subnet_id": "subnet-070e9b60", 
+                        "vpc_id": "vpc-a1920fc6"
+                    }
+                ], 
+                "placement": {
+                    "availability_zone": "eu-west-1b", 
+                    "group_name": "", 
+                    "tenancy": "default"
+                }, 
+                "platform": "windows", 
+                "private_dns_name": "ip-192-168-15-185.eu-west-1.compute.internal", 
+                "private_ip_address": "192.168.15.185", 
+                "product_codes": [], 
+                "public_dns_name": "ec2-34-251-23-184.eu-west-1.compute.amazonaws.com", 
+                "public_ip_address": "34.251.23.184", 
+                "root_device_name": "/dev/sda1", 
+                "root_device_type": "ebs", 
+                "security_groups": [
+                    {
+                        "group_id": "sg-bf251ac7", 
+                        "group_name": "launch-wizard-1"
+                    }
+                ], 
+                "source_dest_check": true, 
+                "state": {
+                    "code": 16, 
+                    "name": "running"
+                }, 
+                "state_transition_reason": "", 
+                "subnet_id": "subnet-070e9b60", 
+                "tags": {}, 
+                "virtualization_type": "hvm", 
+                "vpc_id": "vpc-a1920fc6"
+            }, 
+            {
+                "ami_launch_index": 0, 
+                "architecture": "x86_64", 
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1", 
+                        "ebs": {
+                            "attach_time": "2017-09-27T11:13:59+00:00", 
+                            "delete_on_termination": true, 
+                            "status": "attached", 
+                            "volume_id": "vol-06c1d34ede4bd2ff0"
+                        }
+                    }
+                ], 
+                "client_token": "CQACs1506510837317", 
+                "ebs_optimized": false, 
+                "ena_support": true, 
+                "hypervisor": "xen", 
+                "image_id": "ami-6dd02214", 
+                "instance_id": "i-03e30da1877341602", 
+                "instance_type": "t2.micro", 
+                "key_name": "VPNKEY", 
+                "launch_time": "2017-10-11T05:16:20+00:00", 
+                "monitoring": {
+                    "state": "disabled"
+                }, 
+                "network_interfaces": [
+                    {
+                        "association": {
+                            "ip_owner_id": "amazon", 
+                            "public_dns_name": "ec2-52-16-70-102.eu-west-1.compute.amazonaws.com", 
+                            "public_ip": "52.16.70.102"
+                        }, 
+                        "attachment": {
+                            "attach_time": "2017-09-27T11:13:58+00:00", 
+                            "attachment_id": "eni-attach-ad9128cf", 
+                            "delete_on_termination": true, 
+                            "device_index": 0, 
+                            "status": "attached"
+                        }, 
+                        "description": "Primary network interface", 
+                        "groups": [
+                            {
+                                "group_id": "sg-bf251ac7", 
+                                "group_name": "launch-wizard-1"
+                            }
+                        ], 
+                        "ipv6_addresses": [], 
+                        "mac_address": "02:e3:a7:34:13:ba", 
+                        "network_interface_id": "eni-0c5db720", 
+                        "owner_id": "854007681527", 
+                        "private_dns_name": "ip-192-168-15-174.eu-west-1.compute.internal", 
+                        "private_ip_address": "192.168.15.174", 
+                        "private_ip_addresses": [
+                            {
+                                "association": {
+                                    "ip_owner_id": "amazon", 
+                                    "public_dns_name": "ec2-52-16-70-102.eu-west-1.compute.amazonaws.com", 
+                                    "public_ip": "52.16.70.102"
+                                }, 
+                                "primary": true, 
+                                "private_dns_name": "ip-192-168-15-174.eu-west-1.compute.internal", 
+                                "private_ip_address": "192.168.15.174"
+                            }
+                        ], 
+                        "source_dest_check": true, 
+                        "status": "in-use", 
+                        "subnet_id": "subnet-070e9b60", 
+                        "vpc_id": "vpc-a1920fc6"
+                    }
+                ], 
+                "placement": {
+                    "availability_zone": "eu-west-1b", 
+                    "group_name": "", 
+                    "tenancy": "default"
+                }, 
+                "platform": "windows", 
+                "private_dns_name": "ip-192-168-15-174.eu-west-1.compute.internal", 
+                "private_ip_address": "192.168.15.174", 
+                "product_codes": [], 
+                "public_dns_name": "ec2-52-16-70-102.eu-west-1.compute.amazonaws.com", 
+                "public_ip_address": "52.16.70.102", 
+                "root_device_name": "/dev/sda1", 
+                "root_device_type": "ebs", 
+                "security_groups": [
+                    {
+                        "group_id": "sg-bf251ac7", 
+                        "group_name": "launch-wizard-1"
+                    }
+                ], 
+                "source_dest_check": true, 
+                "state": {
+                    "code": 16, 
+                    "name": "running"
+                }, 
+                "state_transition_reason": "", 
+                "subnet_id": "subnet-070e9b60", 
+                "tags": {}, 
+                "virtualization_type": "hvm", 
+                "vpc_id": "vpc-a1920fc6"
+            }, 
+            {
+                "ami_launch_index": 0, 
+                "architecture": "x86_64", 
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1", 
+                        "ebs": {
+                            "attach_time": "2017-10-09T08:33:56+00:00", 
+                            "delete_on_termination": true, 
+                            "status": "attached", 
+                            "volume_id": "vol-02005d0dee16d8ae4"
+                        }
+                    }
+                ], 
+                "client_token": "VBHzD1507538035176", 
+                "ebs_optimized": false, 
+                "ena_support": true, 
+                "hypervisor": "xen", 
+                "image_id": "ami-785db401", 
+                "instance_id": "i-07a7189717bab560b", 
+                "instance_type": "t2.micro", 
+                "key_name": "VPNKEY", 
+                "launch_time": "2017-10-09T08:33:55+00:00", 
+                "monitoring": {
+                    "state": "disabled"
+                }, 
+                "network_interfaces": [
+                    {
+                        "attachment": {
+                            "attach_time": "2017-10-09T08:33:55+00:00", 
+                            "attachment_id": "eni-attach-d49fd4b6", 
+                            "delete_on_termination": true, 
+                            "device_index": 0, 
+                            "status": "attached"
+                        }, 
+                        "description": "Primary network interface", 
+                        "groups": [
+                            {
+                                "group_id": "sg-bf251ac7", 
+                                "group_name": "launch-wizard-1"
+                            }
+                        ], 
+                        "ipv6_addresses": [], 
+                        "mac_address": "02:e2:1b:ea:e5:3a", 
+                        "network_interface_id": "eni-942987b8", 
+                        "owner_id": "854007681527", 
+                        "private_dns_name": "ip-192-168-15-173.eu-west-1.compute.internal", 
+                        "private_ip_address": "192.168.15.173", 
+                        "private_ip_addresses": [
+                            {
+                                "primary": true, 
+                                "private_dns_name": "ip-192-168-15-173.eu-west-1.compute.internal", 
+                                "private_ip_address": "192.168.15.173"
+                            }
+                        ], 
+                        "source_dest_check": true, 
+                        "status": "in-use", 
+                        "subnet_id": "subnet-070e9b60", 
+                        "vpc_id": "vpc-a1920fc6"
+                    }
+                ], 
+                "placement": {
+                    "availability_zone": "eu-west-1b", 
+                    "group_name": "", 
+                    "tenancy": "default"
+                }, 
+                "private_dns_name": "ip-192-168-15-173.eu-west-1.compute.internal", 
+                "private_ip_address": "192.168.15.173", 
+                "product_codes": [], 
+                "public_dns_name": "", 
+                "root_device_name": "/dev/sda1", 
+                "root_device_type": "ebs", 
+                "security_groups": [
+                    {
+                        "group_id": "sg-bf251ac7", 
+                        "group_name": "launch-wizard-1"
+                    }
+                ], 
+                "source_dest_check": true, 
+                "state": {
+                    "code": 80, 
+                    "name": "stopped"
+                }, 
+                "state_reason": {
+                    "code": "Client.UserInitiatedShutdown", 
+                    "message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                }, 
+                "state_transition_reason": "User initiated (2017-10-09 13:10:39 GMT)", 
+                "subnet_id": "subnet-070e9b60", 
+                "tags": {}, 
+                "virtualization_type": "hvm", 
+                "vpc_id": "vpc-a1920fc6"
+            }, 
+            {
+                "ami_launch_index": 0, 
+                "architecture": "x86_64", 
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1", 
+                        "ebs": {
+                            "attach_time": "2017-10-03T06:19:38+00:00", 
+                            "delete_on_termination": true, 
+                            "status": "attached", 
+                            "volume_id": "vol-05b9014bdaa5817f7"
+                        }
+                    }
+                ], 
+                "client_token": "150701157445176698", 
+                "ebs_optimized": false, 
+                "ena_support": false, 
+                "hypervisor": "xen", 
+                "image_id": "ami-061b1560", 
+                "instance_id": "i-05c48ed2e80b4c451", 
+                "instance_type": "t2.micro", 
+                "key_name": "VPNKEY", 
+                "launch_time": "2017-10-06T04:55:11+00:00", 
+                "monitoring": {
+                    "state": "disabled"
+                }, 
+                "network_interfaces": [
+                    {
+                        "attachment": {
+                            "attach_time": "2017-10-03T06:19:37+00:00", 
+                            "attachment_id": "eni-attach-ef12738d", 
+                            "delete_on_termination": true, 
+                            "device_index": 0, 
+                            "status": "attached"
+                        }, 
+                        "description": "Primary network interface", 
+                        "groups": [
+                            {
+                                "group_id": "sg-bf251ac7", 
+                                "group_name": "launch-wizard-1"
+                            }
+                        ], 
+                        "ipv6_addresses": [], 
+                        "mac_address": "02:0e:a1:b8:bf:76", 
+                        "network_interface_id": "eni-cb4089e7", 
+                        "owner_id": "854007681527", 
+                        "private_dns_name": "ip-192-168-15-172.eu-west-1.compute.internal", 
+                        "private_ip_address": "192.168.15.172", 
+                        "private_ip_addresses": [
+                            {
+                                "primary": true, 
+                                "private_dns_name": "ip-192-168-15-172.eu-west-1.compute.internal", 
+                                "private_ip_address": "192.168.15.172"
+                            }
+                        ], 
+                        "source_dest_check": true, 
+                        "status": "in-use", 
+                        "subnet_id": "subnet-070e9b60", 
+                        "vpc_id": "vpc-a1920fc6"
+                    }
+                ], 
+                "placement": {
+                    "availability_zone": "eu-west-1b", 
+                    "group_name": "", 
+                    "tenancy": "default"
+                }, 
+                "private_dns_name": "ip-192-168-15-172.eu-west-1.compute.internal", 
+                "private_ip_address": "192.168.15.172", 
+                "product_codes": [
+                    {
+                        "product_code_id": "aw0evgkw8e5c1q413zgy5pjce", 
+                        "product_code_type": "marketplace"
+                    }
+                ], 
+                "public_dns_name": "", 
+                "root_device_name": "/dev/sda1", 
+                "root_device_type": "ebs", 
+                "security_groups": [
+                    {
+                        "group_id": "sg-bf251ac7", 
+                        "group_name": "launch-wizard-1"
+                    }
+                ], 
+                "source_dest_check": true, 
+                "state": {
+                    "code": 80, 
+                    "name": "stopped"
+                }, 
+                "state_reason": {
+                    "code": "Client.UserInitiatedShutdown", 
+                    "message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                }, 
+                "state_transition_reason": "User initiated (2017-10-06 10:53:57 GMT)", 
+                "subnet_id": "subnet-070e9b60", 
+                "tags": {}, 
+                "virtualization_type": "hvm", 
+                "vpc_id": "vpc-a1920fc6"
+            }, 
+            {
+                "ami_launch_index": 0, 
+                "architecture": "x86_64", 
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1", 
+                        "ebs": {
+                            "attach_time": "2017-09-07T08:51:54+00:00", 
+                            "delete_on_termination": true, 
+                            "status": "attached", 
+                            "volume_id": "vol-0705ba449531be967"
+                        }
+                    }
+                ], 
+                "client_token": "150477431136990415", 
+                "ebs_optimized": false, 
+                "ena_support": false, 
+                "hypervisor": "xen", 
+                "image_id": "ami-061b1560", 
+                "instance_id": "i-002d65ac837dfffb1", 
+                "instance_type": "t2.micro", 
+                "key_name": "VPNKEY", 
+                "launch_time": "2017-10-10T11:11:11+00:00", 
+                "monitoring": {
+                    "state": "disabled"
+                }, 
+                "network_interfaces": [
+                    {
+                        "association": {
+                            "ip_owner_id": "854007681527", 
+                            "public_dns_name": "ec2-34-252-17-158.eu-west-1.compute.amazonaws.com", 
+                            "public_ip": "34.252.17.158"
+                        }, 
+                        "attachment": {
+                            "attach_time": "2017-09-07T08:51:53+00:00", 
+                            "attachment_id": "eni-attach-4bc0fc28", 
+                            "delete_on_termination": true, 
+                            "device_index": 0, 
+                            "status": "attached"
+                        }, 
+                        "description": "Primary network interface", 
+                        "groups": [
+                            {
+                                "group_id": "sg-7560340d", 
+                                "group_name": "CentOS 7 -x86_64- - with Updates HVM-1704-AutogenByAWSMP-"
+                            }
+                        ], 
+                        "ipv6_addresses": [], 
+                        "mac_address": "02:cb:04:f4:eb:a6", 
+                        "network_interface_id": "eni-142c6e39", 
+                        "owner_id": "854007681527", 
+                        "private_dns_name": "ip-192-168-15-166.eu-west-1.compute.internal", 
+                        "private_ip_address": "192.168.15.166", 
+                        "private_ip_addresses": [
+                            {
+                                "association": {
+                                    "ip_owner_id": "854007681527", 
+                                    "public_dns_name": "ec2-34-252-17-158.eu-west-1.compute.amazonaws.com", 
+                                    "public_ip": "34.252.17.158"
+                                }, 
+                                "primary": true, 
+                                "private_dns_name": "ip-192-168-15-166.eu-west-1.compute.internal", 
+                                "private_ip_address": "192.168.15.166"
+                            }
+                        ], 
+                        "source_dest_check": false, 
+                        "status": "in-use", 
+                        "subnet_id": "subnet-070e9b60", 
+                        "vpc_id": "vpc-a1920fc6"
+                    }
+                ], 
+                "placement": {
+                    "availability_zone": "eu-west-1b", 
+                    "group_name": "", 
+                    "tenancy": "default"
+                }, 
+                "private_dns_name": "ip-192-168-15-166.eu-west-1.compute.internal", 
+                "private_ip_address": "192.168.15.166", 
+                "product_codes": [
+                    {
+                        "product_code_id": "aw0evgkw8e5c1q413zgy5pjce", 
+                        "product_code_type": "marketplace"
+                    }
+                ], 
+                "public_dns_name": "ec2-34-252-17-158.eu-west-1.compute.amazonaws.com", 
+                "public_ip_address": "34.252.17.158", 
+                "root_device_name": "/dev/sda1", 
+                "root_device_type": "ebs", 
+                "security_groups": [
+                    {
+                        "group_id": "sg-7560340d", 
+                        "group_name": "CentOS 7 -x86_64- - with Updates HVM-1704-AutogenByAWSMP-"
+                    }
+                ], 
+                "source_dest_check": false, 
+                "state": {
+                    "code": 80, 
+                    "name": "stopped"
+                }, 
+                "state_reason": {
+                    "code": "Client.UserInitiatedShutdown", 
+                    "message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                }, 
+                "state_transition_reason": "User initiated (2017-10-10 11:19:10 GMT)", 
+                "subnet_id": "subnet-070e9b60", 
+                "tags": {}, 
+                "virtualization_type": "hvm", 
+                "vpc_id": "vpc-a1920fc6"
+            }, 
+            {
+                "ami_launch_index": 0, 
+                "architecture": "x86_64", 
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1", 
+                        "ebs": {
+                            "attach_time": "2017-09-28T05:49:18+00:00", 
+                            "delete_on_termination": true, 
+                            "status": "attached", 
+                            "volume_id": "vol-086cbf1a1ecfd41eb"
+                        }
+                    }
+                ], 
+                "client_token": "15065777548003293", 
+                "ebs_optimized": false, 
+                "ena_support": false, 
+                "hypervisor": "xen", 
+                "image_id": "ami-061b1560", 
+                "instance_id": "i-0dc01d2e8f4d990bd", 
+                "instance_type": "t2.micro", 
+                "key_name": "VPNKEY", 
+                "launch_time": "2017-10-05T05:08:02+00:00", 
+                "monitoring": {
+                    "state": "disabled"
+                }, 
+                "network_interfaces": [
+                    {
+                        "attachment": {
+                            "attach_time": "2017-09-28T05:49:17+00:00", 
+                            "attachment_id": "eni-attach-8120a4e3", 
+                            "delete_on_termination": true, 
+                            "device_index": 0, 
+                            "status": "attached"
+                        }, 
+                        "description": "Primary network interface", 
+                        "groups": [
+                            {
+                                "group_id": "sg-bf251ac7", 
+                                "group_name": "launch-wizard-1"
+                            }
+                        ], 
+                        "ipv6_addresses": [], 
+                        "mac_address": "02:46:ee:55:70:80", 
+                        "network_interface_id": "eni-8459afa8", 
+                        "owner_id": "854007681527", 
+                        "private_dns_name": "ip-192-168-15-177.eu-west-1.compute.internal", 
+                        "private_ip_address": "192.168.15.177", 
+                        "private_ip_addresses": [
+                            {
+                                "primary": true, 
+                                "private_dns_name": "ip-192-168-15-177.eu-west-1.compute.internal", 
+                                "private_ip_address": "192.168.15.177"
+                            }
+                        ], 
+                        "source_dest_check": true, 
+                        "status": "in-use", 
+                        "subnet_id": "subnet-070e9b60", 
+                        "vpc_id": "vpc-a1920fc6"
+                    }
+                ], 
+                "placement": {
+                    "availability_zone": "eu-west-1b", 
+                    "group_name": "", 
+                    "tenancy": "default"
+                }, 
+                "private_dns_name": "ip-192-168-15-177.eu-west-1.compute.internal", 
+                "private_ip_address": "192.168.15.177", 
+                "product_codes": [
+                    {
+                        "product_code_id": "aw0evgkw8e5c1q413zgy5pjce", 
+                        "product_code_type": "marketplace"
+                    }
+                ], 
+                "public_dns_name": "", 
+                "root_device_name": "/dev/sda1", 
+                "root_device_type": "ebs", 
+                "security_groups": [
+                    {
+                        "group_id": "sg-bf251ac7", 
+                        "group_name": "launch-wizard-1"
+                    }
+                ], 
+                "source_dest_check": true, 
+                "state": {
+                    "code": 80, 
+                    "name": "stopped"
+                }, 
+                "state_reason": {
+                    "code": "Client.UserInitiatedShutdown", 
+                    "message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                }, 
+                "state_transition_reason": "User initiated (2017-10-05 12:50:54 GMT)", 
+                "subnet_id": "subnet-070e9b60", 
+                "tags": {}, 
+                "virtualization_type": "hvm", 
+                "vpc_id": "vpc-a1920fc6"
+            }, 
+            {
+                "ami_launch_index": 0, 
+                "architecture": "x86_64", 
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1", 
+                        "ebs": {
+                            "attach_time": "2017-10-09T08:30:10+00:00", 
+                            "delete_on_termination": true, 
+                            "status": "attached", 
+                            "volume_id": "vol-02b99a11acbfd2c57"
+                        }
+                    }
+                ], 
+                "client_token": "150753780748784584", 
+                "ebs_optimized": false, 
+                "ena_support": false, 
+                "hypervisor": "xen", 
+                "image_id": "ami-061b1560", 
+                "instance_id": "i-0959a71d8a8a751ec", 
+                "instance_type": "t2.micro", 
+                "key_name": "VPNKEY", 
+                "launch_time": "2017-10-11T05:11:48+00:00", 
+                "monitoring": {
+                    "state": "disabled"
+                }, 
+                "network_interfaces": [
+                    {
+                        "attachment": {
+                            "attach_time": "2017-10-09T08:30:10+00:00", 
+                            "attachment_id": "eni-attach-2886cd4a", 
+                            "delete_on_termination": true, 
+                            "device_index": 0, 
+                            "status": "attached"
+                        }, 
+                        "description": "Primary network interface", 
+                        "groups": [
+                            {
+                                "group_id": "sg-bf251ac7", 
+                                "group_name": "launch-wizard-1"
+                            }
+                        ], 
+                        "ipv6_addresses": [], 
+                        "mac_address": "02:fb:9a:3f:e6:90", 
+                        "network_interface_id": "eni-bf52fc93", 
+                        "owner_id": "854007681527", 
+                        "private_dns_name": "ip-192-168-15-183.eu-west-1.compute.internal", 
+                        "private_ip_address": "192.168.15.183", 
+                        "private_ip_addresses": [
+                            {
+                                "primary": true, 
+                                "private_dns_name": "ip-192-168-15-183.eu-west-1.compute.internal", 
+                                "private_ip_address": "192.168.15.183"
+                            }
+                        ], 
+                        "source_dest_check": true, 
+                        "status": "in-use", 
+                        "subnet_id": "subnet-070e9b60", 
+                        "vpc_id": "vpc-a1920fc6"
+                    }
+                ], 
+                "placement": {
+                    "availability_zone": "eu-west-1b", 
+                    "group_name": "", 
+                    "tenancy": "default"
+                }, 
+                "private_dns_name": "ip-192-168-15-183.eu-west-1.compute.internal", 
+                "private_ip_address": "192.168.15.183", 
+                "product_codes": [
+                    {
+                        "product_code_id": "aw0evgkw8e5c1q413zgy5pjce", 
+                        "product_code_type": "marketplace"
+                    }
+                ], 
+                "public_dns_name": "", 
+                "root_device_name": "/dev/sda1", 
+                "root_device_type": "ebs", 
+                "security_groups": [
+                    {
+                        "group_id": "sg-bf251ac7", 
+                        "group_name": "launch-wizard-1"
+                    }
+                ], 
+                "source_dest_check": true, 
+                "state": {
+                    "code": 80, 
+                    "name": "stopped"
+                }, 
+                "state_reason": {
+                    "code": "Client.UserInitiatedShutdown", 
+                    "message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                }, 
+                "state_transition_reason": "User initiated (2017-10-11 05:17:13 GMT)", 
+                "subnet_id": "subnet-070e9b60", 
+                "tags": {}, 
+                "virtualization_type": "hvm", 
+                "vpc_id": "vpc-a1920fc6"
+            }
+        ]
+    }
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0   
+

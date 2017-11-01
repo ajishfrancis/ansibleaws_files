@@ -1,0 +1,7 @@
+---
+ - hosts: WIN02
+   tasks:
+    - name: copying files from controller to win02
+      win_copy:
+       src: /home/automation/activedirectory
+       dest: C:\Test\controller_files\suvi

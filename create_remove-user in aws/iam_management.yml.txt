@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: yes
+  var_files:
+  - [var.yml]
+  tasks:
+    - name: create user
+      iam:
+      aws_access_key: "{{ ec2_access_key }}"
+      aws_secret_key: "{{ ec2_secret_key }}"
+      iam_type: user
+      name: user1
+      state: present
+      access_key_state: create

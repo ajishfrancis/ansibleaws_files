@@ -1,0 +1,13 @@
+---
+  - name: Automated option to find a vm is migrated in aws
+    hosts: localhost
+    connection: local
+    vars_files:
+    - [../var.yml]
+    tasks:
+    - name: Store Date
+      set_fact: temp="{{lookup('pipe','date \"+%Y-%m-%d %H\"')}}"
+    - ec2_instance_facts:
+       filters:
+        vpc-id: '{{ vpc }}'
+        launch-time: '{{ temp }}*'

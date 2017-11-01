@@ -1,0 +1,26 @@
+---
+  - name: Automated option to find a vm is migrated in aws
+    hosts: localhost
+    connection: local
+    vars_files:
+    - [../var.yml]
+    vars:
+      my_unsafe_variable: !unsafe ' - '
+      dt_now: "{{lookup('pipe','date \"+%Y-%m-%d %H:%M:%S+00:00\"')}}"
+      inst_lt: "{{ (inst.instances[0].launch_time) | regex_replace('T',' ')}}"
+    tasks:
+    - ec2_instance_facts:
+       filters:
+        vpc-id: vpc-a1920fc6
+      register: inst
+    - set_fact:
+#        dt_now: "{{lookup('pipe','date \"+%Y-%m-%d %H:%M:%S+00:00\"')}}"
+#        inst_lt: "{{ (inst.instances[0].launch_time) | regex_replace('T',' ') }}" 
+        inst_id: "{{ inst.instances | map(attribute='instance_id') | list }}"
+        launch_tm: "{{ inst.instances | map(attribute='launch_time') | list | regex_replace('T',' ')}}"
+        comp: "{{lookup('pipe','date \"{{dt_now}}\" - date \"{{inst_lt}}\"')}}"
+    - debug: msg="{{ dt_now }} is the current system time"
+    - debug: msg="{{ inst_lt }} is the latest instance launch_time"
+    - debug: msg="{{ inst_id }} , {{ launch_tm }} "
+    - debug: msg="{{ comp }}"
+#    - debug: msg="{{ (dt_now - inst_lt).days }}"

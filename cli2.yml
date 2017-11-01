@@ -1,0 +1,23 @@
+---
+ - hosts: localhost
+   connection: local
+   gather_facts: no
+   vars_files:
+   - [var.yml]
+   tasks:
+      - name: 'Install AWS CLI'
+        tags: 'aws-cli'
+        become: 'yes'
+        pip: > 
+          name=awscli
+          state=latest
+      - name: cli
+        command: printf '{{aws_access_key}}\n{{aws_secret_key}}' | aws configure
+      - debug:
+         msg: "aws {{aws_access_key}} and secret key {{aws_secret_key}}"
+      - name: version
+
+#        command: AWS_ACCESS_KEY_ID={{aws_access_key}} AWS_SECRET_ACCESS_KEY={{aws_secret_key}} aws ec2 import-image --description "windows 2008 ova" --license-type BYOL --disk-containers '{"Description":"Windows","Format":"ova","UserBucket":{"S3Bucket":"ansiblebucketcoe","S3Key":"Ovaupload/Node1.ova"}}' region eu-west-1 
+        command: AWS_ACCESS_KEY_ID={{aws_access_key}} AWS_SECRET_ACCESS_KEY={{aws_secret_key}}aws ec2 import-image --description "windows 2008 ova" --license-type BYOL --disk-containers file:///home/automation/ajishaws/sonal/ansible-aws/containers.json region eu-west-1 
+#        - debug
+#            msg: "aws {{aws_access_key}}"

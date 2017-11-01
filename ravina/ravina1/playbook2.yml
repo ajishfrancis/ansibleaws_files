@@ -1,0 +1,6 @@
+---
+ - hosts: WIN02
+   tasks:
+    - win_copy:
+       src: /etc/
+       dest: C:\Test\controller_files\etc

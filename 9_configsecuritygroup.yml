@@ -1,0 +1,35 @@
+---
+- name: applying securitygroup rules
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  vars_files:
+  - [var.yml]
+  tasks:
+  - name: ec2 groupmaking
+    ec2_group:
+      name: ec2 group name
+      description: an example for ec2 group
+      vpc_id: vpc-a1920fc6
+      region: eu-west-1
+      aws_secret_key: "{{aws_secret_key}}"
+      aws_access_key: "{{aws_access_key}}"
+      rules:
+       - proto: tcp
+         from_port: 80
+         to_port: 80
+         cidr_ip: 10.0.0.0/8
+       - proto: udp
+         from_port: 10051
+         to_port: 10051
+         group_id: sg-bf251ac7
+       - proto: icmp
+         from_port: 8
+         to_port: -1
+         cidr_ip: 10.0.0.0/8
+      rules_egress:
+       - proto: tcp
+         from_port: 80
+         to_port: 80
+         cidr_ip: 10.0.0.0/8
+       #  cidr_ipv6: 64:ff9b::/96

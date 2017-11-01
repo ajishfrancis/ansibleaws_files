@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  tasks:
+    - name: create user
+      iam:
+       aws_access_key: "{{ aws_access_key }}"
+       aws_secret_key: "{{ aws_secret_key }}"
+       iam_type: group
+       name: group1
+       state: present
+      register: new_groups
+       #access_key_state: create

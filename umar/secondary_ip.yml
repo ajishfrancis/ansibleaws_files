@@ -1,0 +1,17 @@
+---
+- name: Allocating secondary IP to instance
+  hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  tasks:
+  - name: started
+    ec2_eni:
+       aws_access_key: "{{aws_access_key}}"
+       aws_secret_key: "{{aws_secret_key}}"
+       subnet_id: subnet-070e9b60
+       eni_id: eni-335db71f
+       region: eu-west-1
+       state: present
+       secondary_private_ip_addresses: 192.168.15.175
+               

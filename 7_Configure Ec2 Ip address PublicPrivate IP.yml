@@ -1,0 +1,19 @@
+---
+- name: Configuration of IP Address
+  hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  tasks:
+  - ec2:
+     key_name: VPNKEY
+     instance_type: t2.micro 
+     image: ami-6dd02214
+     wait: yes
+     region: eu-west-1
+     group_id: sg-bf251ac7 
+     vpc_subnet_id: subnet-070e9b60
+     assign_public_ip: yes
+     private_ip: 192.168.15.189
+     aws_access_key: "{{aws_access_key}}"
+     aws_secret_key: "{{aws_secret_key}}" 

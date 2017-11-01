@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  vars:
+    vpc_list:
+      - region: eu-west-1
+        aws_secret_key:  "{{aws_secret_key}}"
+        aws_access_key: "{{aws_access_key}}"
+        state: present
+        cidr_block: 10.1.0.0/16
+        resource_tags:
+          Environment: dev 
+        internet_gateway: True
+        subnets:
+          - cidr: 10.1.0.0/24
+            az: eu-west-1a
+            resource_tags: { "Name": "dev_public", "Environment": "dev", "Tier": "public" }
+          - cidr: 10.1.100.0/24
+            az: eu-west-1a
+            resource_tags: { "Name": "dev_private", "Environment": "dev", "Tier": "private" }
+
+   name: Creating the Private and Public Subnet 
+   tasks:
+        ec2_vpc:
+          region: "{{ item.region }}" 
+          state: "{{ item.state }}" 
+          cidr_block: "{{ item.cidr_block }}" 
+          resource_tags: "{{ item.resource_tags }}" 
+          internet_gateway: "{{ item.internet_gateway }}" 
+          subnets: "{{ item.subnets }}" 
+        with_items: vpc_list
+        register: ec2_vpc_out

@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+  - [var.yml]
+  tasks:
+   - name: remove user
+     iam:
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      iam_type: user
+      name: user1
+      state: absent

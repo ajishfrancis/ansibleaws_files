@@ -1,0 +1,13 @@
+---
+  - name: Automated option to find a vm is migrated in aws
+    hosts: localhost
+    connection: local
+    vars_files:
+    - [var.yml]
+    tasks:
+    - ec2_instance_facts:
+       register: ec2
+       filters:
+        vpc-id: vpc-a1920fc6
+    - debug:
+       msg: "{{ ec2.instances }}"

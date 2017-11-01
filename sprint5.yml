@@ -1,0 +1,18 @@
+---
+ - name: Backup snapshot
+   hosts: localhost 
+   connection: local
+   vars_files: 
+   - [var.yml] 
+   tasks:
+   - ec2_snapshot:
+      region: eu-west-1
+     # volume_id: vol-0fcb471f119ddc42d
+      description: snapshot of data
+      instance_id: i-0ce2fc1242b26ce20
+      device_name: /dev/sda1
+      description: snapshot of data
+      snapshot_tags:
+         frequency: hourly
+         source: /data
+
