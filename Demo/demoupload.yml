@@ -1,0 +1,23 @@
+---
+ - hosts: localhost
+   connection: local
+   gather_facts: no
+   sudo: yes
+   vars_files:
+   - [var.yml]
+   tasks:
+      - name: 'Install AWS CLI'
+        tags: 'aws-cli'
+        become: 'yes'
+        pip: > 
+          name=awscli
+          state=latest
+      - name: cli configuration
+        shell: /home/automation/ajishaws/sonal/ansible-aws/a.sh {{aws_access_key}} {{aws_secret_key}}
+      - debug:
+         msg: "aws {{aws_access_key}} and secret key {{aws_secret_key}}"
+      -  name: upload of the file
+         command: aws s3 cp DEMOFILE.txt s3://ansiblebucketcoe/vmimages/DEMOFILE.txt --sse "AES256"
+     
+
+

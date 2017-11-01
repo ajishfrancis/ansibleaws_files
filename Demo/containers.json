@@ -1,0 +1,9 @@
+[
+  {
+    "Description": "Node2 VM",
+    "Format": "vmdk",
+    "UserBucket": {
+        "S3Bucket": "ansiblebucketcoe",
+        "S3Key": "vmimages/Node2-disk1.vmdk"
+    }
+}]

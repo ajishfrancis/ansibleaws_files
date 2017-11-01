@@ -1,0 +1,31 @@
+---
+# Basic provisioning example
+ - name: Create AWS resources
+   hosts: localhost
+   connection: local
+   gather_facts: False
+   vars_files:
+   - [var.yml]
+   tasks:
+   - name: Create an EC2 instance
+     ec2:
+        aws_access_key: "{{aws_access_key}}"
+        aws_secret_key: "{{aws_secret_key}}"
+        key_name: VPNKEY
+        region: eu-west-1
+        #group_id: sg-bf251ac7
+        instance_type: t2.micro
+        image: ami-b801a6c1
+        wait: yes
+        volumes:
+         - device_name: /dev/sda1
+           volume_type: gp2
+           volume_size: 40
+           delete_on_termination: true
+        exact_count: 1
+        count_tag:
+          Name: aws-demo1
+        instance_tags:
+          Name: aws-demo1
+     register: ec2
+ 
